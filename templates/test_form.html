@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>New Test Entry</h2>
+  <form method="post" class="grid two">
+    <label>Device No.
+      <input type="text" name="device_no" value="{{ (preset and preset.device_no) or '' }}" required>
+    </label>
+    <label> Bluetooth No.
+      <input type="text" name="test_no" value="{{ (preset and preset.test_no) or '' }}" required>
+    </label>
+    <label>Order ID
+      <input type="text" name="order_id" value="{{ (preset and preset.order_id) or '' }}">
+    </label>
+    <label>Pop
+      <select name="pop">
+        <option>No</option><option>Yes</option>
+      </select>
+    </label>
+    <label>Scratch &amp; Feinguide
+      <select name="scratch_feinguide">
+        <option>No</option><option>Yes</option>
+      </select>
+    </label>
+    <label>Buttons Hardness
+      <select name="button_hardness">
+        <option>OK</option><option>Not OK</option>
+      </select>
+    </label>
+    <label>Button Going Inside
+      <select name="button_going_inside">
+        <option>OK</option><option>Not OK</option>
+      </select>
+    </label>
+    <label>Button ON/OFF
+      <select name="button_on_off">
+        <option>OK</option><option>Not OK</option>
+      </select>
+    </label>
+    <label>Charging
+      <select name="charging">
+        <option>OK</option><option>Not OK</option>
+      </select>
+    </label>
+    <label>
+      <input type="checkbox" name="ndr" {% if preset and preset.ndr %}checked{% endif %}>
+      Non-Deliver Returns (NDR)
+    </label>
+    <label class="full">Test Remark
+      <textarea name="test_remark" rows="2"></textarea>
+    </label>
+    <button type="submit" class="btn btn-primary">Save</button>
+  <a href="{{ url_for('list_tests') }}" class="btn btn-secondary">Test Record</a>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card narrow">
+  <h2>Add New User</h2>
+  <form method="post">
+    <label>Full Name:
+      <input name="full_name">
+    </label><br>
+    <label>Username:
+      <input name="username" required>
+    </label><br>
+    <label>Password:
+      <input name="password" type="password" required>
+    </label><br>
+    <button type="submit">Add User</button>
+  </form>
+  <a href="{{ url_for('admin_users') }}">User Management</a>
+</div>
+{% endblock %}

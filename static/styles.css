@@ -1,0 +1,23 @@
+* { box-sizing: border-box; font-family: system-ui, Arial, sans-serif; }
+body { margin: 0; background: #f6f7fb; color: #1f2937; }
+header { background: #111827; color: white; padding: 12px 16px; display:flex; align-items:center; justify-content:space-between; }
+header h1 { font-size: 18px; margin: 0; }
+nav a { color: white; text-decoration: none; margin-left: 12px; }
+main { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+.card { background: white; border-radius: 12px; padding: 16px; box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
+.card.narrow { max-width: 400px; margin: 0 auto; }
+.grid { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+.grid.two { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.grid .full { grid-column: 1 / -1; }
+label { display: flex; flex-direction: column; font-size: 14px; gap: 6px; }
+input, select, textarea { padding: 10px; border: 1px solid #d1d5db; border-radius: 8px; }
+button, .button { padding: 10px 12px; background: #2563eb; color: white; border: none; border-radius: 10px; cursor: pointer; text-align:center; display:inline-block; }
+.button { text-decoration: none; }
+.flashes { list-style: none; padding: 0; }
+.flashes li { margin: 8px 0; padding: 10px; border-radius: 8px; }
+.flashes .success { background: #dcfce7; }
+.flashes .danger { background: #fee2e2; }
+.flashes .warning { background: #fef9c3; }
+table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+th, td { border: 1px solid #e5e7eb; padding: 8px; font-size: 13px; text-align: left; vertical-align: top; }
+.hint { color: #6b7280; font-size: 12px; }

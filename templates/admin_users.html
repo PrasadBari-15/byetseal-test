@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>User Management</h2>
+
+<!-- Add User Button -->
+<div style="margin-bottom: 16px;">
+  <a href="{{ url_for('create_user') }}" class="btn btn-success">Add New User</a>
+</div>
+
+<!-- User Table -->
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Full Name</th>
+      <th>Admin</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for u in users %}
+    <tr>
+      <td>{{ u.id }}</td>
+      <td>{{ u.username }}</td>
+      <td>{{ u.full_name }}</td>
+      <td>{{ "Yes" if u.is_admin else "No" }}</td>
+      <td>
+        <!-- Remove User (not for admin) -->
+        {% if not u.is_admin %}
+        <form action="{{ url_for('remove_user', user_id=u.id) }}" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Remove user {{ u.username }}?')">Remove</button>
+        </form>
+        {% endif %}
+        <!-- View Actions -->
+        <a href="{{ url_for('user_actions', user_id=u.id) }}" class="btn btn-info btn-sm">View Actions</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<!-- Back to Dashboard -->
+<a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>Welcome, {{ user.full_name or user.username }}!</h2>
+  <div class="grid">
+    <a class="button" href="{{ url_for('new_test') }}">➕ Start a Test</a>
+    <a class="button" href="{{ url_for('list_tests') }}">📄 View Tests / Export</a>
+    {% if user.is_admin %}
+      <a class="button" href="{{ url_for('create_user') }}">👤 Create User</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

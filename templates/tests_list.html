@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>Test Records</h2>
+  
+  <form class="grid two" method="get">
+    <label>Start date (YYYY-MM-DD)
+      <input type="date" name="start" value="{{ start }}">
+    </label>
+    <label>End date (YYYY-MM-DD)
+      <input type="date" name="end" value="{{ end }}">
+    </label>
+    <button class="full" type="submit">Apply Filter</button>
+    <a class="button full" href="{{ url_for('export_excel', start=start, end=end) }}">⬇️ Download Excel</a>
+  </form>
+  <br> </br>
+<!-- Search Bar -->
+  <form method="get" style="margin-bottom: 16px;">
+    <input type="text" name="search" placeholder="Search Device No" value="{{ search }}">
+    <button type="submit">Search</button>
+    <!-- Keep existing filters if present -->
+    <input type="hidden" name="start" value="{{ start }}">
+    <input type="hidden" name="end" value="{{ end }}">
+  </form>
+  <table>
+    <thead>
+      <tr>
+        <th>Order ID</th>
+        <th>Date (UTC)</th>
+        <th>Device No</th>
+        <th>Pop</th>
+        <th>Scratch &amp; Feinguide</th>
+        <th>Buttons Hardness</th>
+        <th>Button Going Inside</th>
+        <th>Button ON/OFF</th>
+        <th>Charging</th>
+        <th>Bluetooth No</th>
+        <th>Remark</th>
+        <th>Tester</th>
+        <th>Edit</th>
+        <th>NDR</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in rows %}
+      <tr>
+        <td>{{ r.order_id }}</td>
+        <td>{{ r.created_at.strftime('%Y-%m-%d') }}</td>
+        <td>{{ r.device_no }}</td>
+        <td>{{ r.pop }}</td>
+        <td>{{ r.scratch_feinguide }}</td>
+        <td>{{ r.button_hardness }}</td>
+        <td>{{ r.button_going_inside }}</td>
+        <td>{{ r.button_on_off }}</td>
+        <td>{{ r.charging }}</td>
+        <td>{{ r.test_no }}</td>
+        <td>{{ r.test_remark }}</td>
+        <td>{{ r.tester_name }}</td>
+        <td>
+          <a href="{{ url_for('edit_test', test_id=r.id) }}" class="btn btn-sm btn-warning">Edit</a>
+        </td>
+        <td>{% if r.ndr %}✔️{% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back</a>
+</div>
+{% endblock %}

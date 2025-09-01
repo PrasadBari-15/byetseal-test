@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Records tested by {{ user.full_name or user.username }}</h2>
+
+<!-- Date Filter Form -->
+<form method="get" class="form-inline" style="margin-bottom: 16px;">
+  <label for="date">Select Date:</label>
+  <input type="date" id="date" name="date" value="{{ selected_date }}" class="form-control" style="margin: 0 8px;">
+  <button type="submit" class="btn btn-primary btn-sm">Filter</button>
+  {% if selected_date %}
+    <a href="{{ url_for('user_actions', user_id=user.id) }}" class="btn btn-secondary btn-sm">Clear</a>
+  {% endif %}
+</form>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Device No</th>
+      <th>Test No</th>
+      <th>Remark</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for r in records %}
+    <tr>
+      <td>{{ r.device_no }}</td>
+      <td>{{ r.test_no }}</td>
+      <td>{{ r.test_remark }}</td>
+      <td>{{ r.created_at.strftime("%Y-%m-%d") }}</td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="4" class="text-center">No records found for this date.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<a href="{{ url_for('admin_users') }}" class="btn btn-secondary">Back to User Management</a>
+{% endblock %}
